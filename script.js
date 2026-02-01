@@ -395,22 +395,7 @@ function showKissDayIfUnlocked() {
     startKissTyping();
   }
 }
-function showValentineDayIfUnlocked() {
-    const now = new Date();
-    const vDay = new Date(now.getFullYear(), 1, 14, 0, 0, 0); // Feb 14
 
-
-    if (now >= vDay) {
-        // Hide everything else
-        const sections = ["loginSection", "roseDaySection", "proposeDaySection", "chocolateDaySection", "teddyDaySection", "promiseDaySection", "hugDaySection", "kissDaySection","countdown"];
-        sections.forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.style.display = "none";
-        });
-        
-        document.getElementById("questionSection").style.display = "block";
-    }
-}
 
 
 
@@ -446,80 +431,9 @@ loginBtn.addEventListener("click", () => {
     showPromiseDayIfUnlocked();
     showHugDayIfUnlocked();
     showKissDayIfUnlocked();
-    showValentineDayIfUnlocked();
-
-
-
-
-
-
-
-
-
-
-
-
 userGreeting.textContent = `Hi ${username} 💕`;
 
   } else {
     errorMsg.textContent = "Wrong username or love password 💔";
   }
 });
-
-/************** QUESTION LOGIC **************/
-/************** QUESTION LOGIC **************/
-let noCount = 0;
-
-// Update these selectors to match your HTML IDs exactly
-const yesBtn = document.getElementById("Yesbtn");
-const noBtn = document.getElementById("Nobtn");
-const questionTitle = document.querySelector("#questionSection h1");
-const questionPara = document.querySelector("#questionSection p");
-
-if (noBtn && yesBtn) {
-    noBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        noCount++;
-
-        // Grow the Yes button
-        const newScale = 1 + noCount * 0.3; 
-        yesBtn.style.transform = `scale(${newScale})`;
-        yesBtn.style.display = "inline-block";
-        yesBtn.style.transition = "transform 0.2s ease";
-
-        // Update text based on clicks
-        if (noCount === 1) {
-            questionTitle.textContent = "Are you sure? 😢";
-            questionPara.textContent = "I think your heart doesn't want to say NO 😊";
-        } else if (noCount === 2) {
-            questionTitle.textContent = "Please don't say NO! 🥺";
-            questionPara.textContent = "Your YES will make my day! 💖";
-        } else if (noCount === 3) {
-            questionTitle.textContent = "I'll make you the happiest! 😊";
-            questionPara.textContent = "Just say YES! 💕";
-        } else {
-            noBtn.style.display = "none";
-            questionTitle.textContent = "Okay, there's only one choice left! 😉";
-        }
-    });
-
-    yesBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        document.getElementById("questionSection").style.display = "none";
-        document.getElementById("valentineSection").style.display = "block";
-        
-        // Update the final love letter text
-        const finalPara = document.querySelector("#valentineSection .valen-text p");
-        if (finalPara) {
-            finalPara.innerHTML = `
-                From the very first moment you entered my life, something quietly changed inside me. 
-                You became the reason my ordinary days felt special.<br><br>
-                Today isn’t just about saying “Happy Valentine’s Day.” 
-                It’s about choosing you — in every small moment. 💖🌹<br><br>
-                <strong>You are, and always will be, my Valentine.</strong>
-            `;
-        }
-        
-        startPetals(); // Celebrate!
-    });
-}
