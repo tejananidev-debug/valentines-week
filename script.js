@@ -1,6 +1,6 @@
 /************** SAVED LOGIN DETAILS **************/
-const SAVED_USERNAME = "user";
-const SAVED_PASSWORD = "love123";
+const SAVED_USERNAME = "Sindhu";
+const SAVED_PASSWORD = "Teja@143";
 let chocolateInterval = null;
 
 
@@ -397,11 +397,7 @@ function showKissDayIfUnlocked() {
 }
 function showValentineDayIfUnlocked() {
     const now = new Date();
-    const vDay= new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate()
-  );
+    const vDay = new Date(now.getFullYear(), 1, 14, 0, 0, 0); // Feb 14
 
 
     if (now >= vDay) {
