@@ -180,7 +180,7 @@ document.getElementById("proposeYesBtn").addEventListener("click", () => {
   alert("She said YES 💖💍 Forever begins now!");
 });
 function showChocolateDayIfUnlocked() {
-  const now = new Date(2026,2,9);
+  const now = new Date();
   const chocolateDay = new Date(now.getFullYear(), 1, 9, 0, 0, 0); // Feb 9
 
   if (now >= chocolateDay) {
