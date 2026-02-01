@@ -122,7 +122,13 @@ const roseDaySection = document.getElementById("roseDaySection");
 function handleRoseDay(username) {
     
   const now = new Date();
-    const roseDayDate = new Date(now.getFullYear(), 1, 7, 0, 0, 0); // Feb 7
+    const roseDayDate = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  );
+
+
 
 
   const greeting = document.getElementById("userGreeting");
