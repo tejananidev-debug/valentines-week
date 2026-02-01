@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Valentines Special</title>
+</head>
+<body>
+    <section id="login">
+    <div id="loginSection">
+        
+        <h1>Welcome to Valentine Week 💘</h1>
+        <input 
+        type="text" 
+        id="username" 
+        placeholder="Your Name 💕"
+        />
+        <input 
+        type="text" 
+        id="password" 
+        placeholder="Enter Love Password ❤️"
+        />
+        <button id="loginBtn">Enter 💖</button>
+         <p id="errorMsg"></p>
+        </div>
+
+
+    </section>
+    <section id="countdown-section" >
+    <div class="countdown-container">
+        <h2 id="userGreeting"></h2>
+            <p id="countdown" style="font-weight: bold; color: #d63384;"></p>
+
+    </div>
+    </section>
+    <section id="roseDaySection" style="display:none;">
+        <div class="rosesection">
+            <div class="rose-text">
+                <h1>🌹 Happy Rose Day 🌹</h1>
+                 <p>
+                    This rose is for the one who makes my heart feel at home 🌹<br>
+                    With you, every moment blooms into something beautiful,<br>
+                    A rose for the one who makes my world bloom 🌸<br> 
+                    Thank you for filling my life with love ❤️<br>
+                    Happy Rose Day, my love ❤️🌸.
+                </p>
+                <a href="https://www.swiggy.com/instamart/item/7ETPDHMODZ" id="takeRoseBtn">Take Rose 🌹</a>
+
+            </div>
+            <div class="rose-img">
+                <img 
+                src="/Valentines project/components/myrose.jpg" 
+                alt="Rose"
+                />
+                <img  src="/Valentines project/components/herrose.jpg" alt="rose"/>
+
+
+            </div>
+            
+
+        </div>
+        <button id="nextDayBtn">Come back tomorrow 💝</button>
+  
+</section>
+<section id="proposeDaySection" style="display:none;">
+    <div class="propose-sec">
+        <div class="proppose-text">
+            <h1>💍 Happy Propose Day 💍</h1>
+            <div class="ring">💍</div>
+            <p class="propose-text">From this moment to forever,<br>will you be mine? 💖</p>
+            
+            <button id="proposeYesBtn">Yes, forever 💕</button>
+
+        </div>
+         
+         <div class="propose-img">
+            <img src="/Valentines project/components/propose.jpg" alt="Propose Image">
+            <img src="/Valentines project/components/prop.jpg" alt="Ring Image">
+        </div>
+
+    </div>
+    <a href="https://www.swiggy.com/instamart/item/NZQBHPOMJA" id="takeRoseBtn">Take Ring💍</a>
+    
+    
+    
+ 
+</section>
+<section id="chocolateDaySection" style="display:none;">
+    <div class="choco-sec">
+        <div class="choco-text">
+            <h1>🍫 Happy Chocolate Day 🍫</h1>
+            <p class="choco-text">Life is sweeter with you, just like chocolate 🍫💖  Here’s a little sweetness, made with love.</p>
+             <button id="nextFromChocolate">Come back tomorrow 🍬</button>
+             <a href="https://www.swiggy.com/instamart/item/Y1JN1GT8WQ?custom_back=false" id="nextFromChocolate">Take your chocolate here 🍫</a>
+        </div>
+          <div class="choco-img">
+            <img src="/Valentines project/components/chocolate.jpg" alt="Chocolate Image" class="val-img">
+            <img src="/Valentines project/components/chocolate 2.jpg" alt="Chocolate Image" class="val-img"/>
+        </div>
+    </div>
+  
+</section>
+<section id="teddyDaySection" style="display:none;">
+    <div class="choco-sec">
+        <div class="choco-text">
+             <h1>🧸 Happy Teddy Day </h1>
+             <div class="teddy">🧸</div>
+             <p class="teddy-text">This teddy is a reminder that whenever you feel low,<br>my hugs are always around you 🤍🧸.This teddy carries my warmth, my care, and my love 🧸💖,Whenever you miss me, hug it tight 🤍</p>
+             <button id="teddyNextBtn">Come back tomorrow 💝</button>
+             <a href="https://www.swiggy.com/instamart/item/UFJIZKIR1U" id="teddyNextBtn">Take your teddy here 🧸</a>
+            
+        </div>
+          <div class="choco-img">
+            <img src="/Valentines project/components/teddy 1.jpg" alt="Teddy Image" class="val-img">
+            <img src="/Valentines project/components/teddy2.jpg" alt="Teddy Image" class="val-img"/>
+
+          </div>
+
+    </div>
+    
+ 
+</section>
+<section id="promiseDaySection" style="display:none;">
+    <div class="choco-sec">
+        <div class="choco-text">
+            <h1>🤞 Happy Promise Day 🤞</h1>
+            <p id="promiseText"></p>
+            <span id="typingCursor"></span>
+            <button id="promiseNextBtn">Come back tomorrow 💖</button>
+            
+        </div>
+        <div class="choco-img">
+            <img src="/Valentines project/components/promise.jpg" alt="Promise Image" class="val-img">
+            <img src="/Valentines project/components/promise2.jpg" alt="Promise Image" class="val-img"/>
+        </div>
+    </div>
+</section>
+<section id="hugDaySection" style="display:none;">
+    <div class="choco-sec">
+        <div class="choco-text">
+            <h1 class="hug-title">🤗 Happy Hug Day 🤗</h1>
+            <p id="hugText"></p>
+            <span id="hugCursor"></span>
+            <button class="next-btn" id="hugNextBtn">Come back tomorrow 💞</button>
+        </div>
+        <div class="choco-img">
+            <img src="/Valentines project/components/hug1.jpg" alt="Hug Image" class="val-img">
+        </div>
+    </div>
+    
+    
+
+</section>
+<section id="kissDaySection" class="kiss-day" style="display:none;">
+  <h1 class="kiss-title">💋 Happy Kiss Day 💋</h1>
+
+  <div class="kiss-center">
+    💋
+  </div>
+
+  <p id="kissText"></p>
+  <span id="kissCursor"></span>
+
+  <button class="kiss-btn" onclick="showKissEffect()">
+    Seal it with a kiss 💖
+  </button>
+</section>
+<section id="questionSection" style="display: none;"> 
+        <div class="section">
+        <div class="main">
+            
+            <div class="bunny-img">
+                <img src="/Valentines project/components/bunny.jpg" alt="Bunny Image">
+            </div>
+            <div class="text-area">
+                <h1>Will you be my valentine😍?</h1>
+                <p>I didn’t plan this but my heart did. 💗!</p>
+                <div class="btn-sec">
+                    <a href="#" class="btn" id="Yes">Yes</a>
+                    <a href="#" class="btn" id="No">No</a>
+                </div>
+
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+<section id="valentineSection" style="display:none;">
+        <div class="bunny-img">
+            <img src="/Valentines project/components/bunny2.jpg" alt="Valentine Image">
+        </div>
+        <div class="valen-text">
+            <h1>Happy Valentine's Day Baby!💖</h1>
+            <p>Wishing you a day filled with love, joy, and all the things that make you smile! 🌟</p>
+        </div>
+        <div class="btn-sec">
+            <a href="#" class="btn" id="Yes">You are officially my Valentine 💖</a>
+            
+        </div>
+        
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>
