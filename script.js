@@ -121,7 +121,7 @@ const roseDaySection = document.getElementById("roseDaySection");
 
 function handleRoseDay(username) {
     
-  const now = new Date();
+  const now = new Date(2026,2,7);
     const roseDayDate = new Date(now.getFullYear(), 1, 7, 0, 0, 0); // Feb 7
 
 
