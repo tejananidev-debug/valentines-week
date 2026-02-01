@@ -399,7 +399,7 @@ function showKissDayIfUnlocked() {
 function showValentineDayIfUnlocked() {
     const now = new Date(); 
     // For testing, you can use: const now = new Date(2026, 1, 14);
-    const vDay = new Date(now.getFullYear(), 1, 2, 0, 0, 0); 
+    const vDay = new Date(now.getFullYear(), 1, 14, 0, 0, 0); 
 
     if (now >= vDay) {
         // Hide all previous sections
