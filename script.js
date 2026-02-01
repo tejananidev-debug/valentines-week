@@ -467,92 +467,59 @@ userGreeting.textContent = `Hi ${username} 💕`;
 });
 
 /************** QUESTION LOGIC **************/
-// 1. Initialize the counter
+/************** QUESTION LOGIC **************/
 let noCount = 0;
 
-// 2. Select the specific elements from the Question Section
-const yesBtn = document.querySelector("#questionSection #Yes");
-const noBtn = document.querySelector("#questionSection #No");
+// Update these selectors to match your HTML IDs exactly
+const yesBtn = document.getElementById("Yesbtn");
+const noBtn = document.getElementById("Nobtn");
 const questionTitle = document.querySelector("#questionSection h1");
 const questionPara = document.querySelector("#questionSection p");
 
-// 3. The "No" Button Logic
-noBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // Prevent page jump for <a> tags
-    noCount++;
+if (noBtn && yesBtn) {
+    noBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        noCount++;
 
-    // Grow the Yes button
-    const newScale = 1 + noCount * 0.2; // Increased growth rate for better effect
-    yesBtn.style.transform = `scale(${newScale})`;
-    yesBtn.style.display = "inline-block"; // Ensure scale works
+        // Grow the Yes button
+        const newScale = 1 + noCount * 0.3; 
+        yesBtn.style.transform = `scale(${newScale})`;
+        yesBtn.style.display = "inline-block";
+        yesBtn.style.transition = "transform 0.2s ease";
 
-    // Update text based on clicks
-    if (noCount === 1) {
-        questionTitle.textContent = "Are you sure? 😢";
-        questionPara.textContent = "I think your heart doesn't want to say NO 😊";
-    } else if (noCount === 2) {
-        questionTitle.textContent = "Please don't say NO! 🥺";
-        questionPara.textContent = "Your YES will make my day! 💖";
-    } else if (noCount === 3) {
-        questionTitle.textContent = "I'll make you the happiest! 😊";
-        questionPara.textContent = "Just say YES! 💕";
-    } else {
-        // Hide the No button after 4 tries
-        noBtn.style.display = "none";
-        questionTitle.textContent = "Okay, there's only one choice left! 😉";
-    }
-});
+        // Update text based on clicks
+        if (noCount === 1) {
+            questionTitle.textContent = "Are you sure? 😢";
+            questionPara.textContent = "I think your heart doesn't want to say NO 😊";
+        } else if (noCount === 2) {
+            questionTitle.textContent = "Please don't say NO! 🥺";
+            questionPara.textContent = "Your YES will make my day! 💖";
+        } else if (noCount === 3) {
+            questionTitle.textContent = "I'll make you the happiest! 😊";
+            questionPara.textContent = "Just say YES! 💕";
+        } else {
+            noBtn.style.display = "none";
+            questionTitle.textContent = "Okay, there's only one choice left! 😉";
+        }
+    });
 
-// 4. The "Yes" Button Logic
-yesBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    document.getElementById("questionSection").style.display = "none";
-    document.getElementById("valentineSection").style.display = "block";
-    alert("Yay! You are my Valentine! 💖");
-
-    
-    // Optional: Start celebratory effects
-    startPetals(); 
-});
-yesBtn.onclick = (e) => {
-  e.preventDefault();
-  questionSection.style.display = "none";
-  valentineSection.style.display = "block";
-
-  document.querySelector(".valen-text p").textContent = `
-From the very first moment you entered my life, something quietly changed inside me.
-You became the reason my ordinary days felt special, my smiles came easier,
-and my heart felt a little more at home.
-
-I may not always have the perfect words, but my feelings for you are real,
-deep, and constant. In your laughter, I find my happiness.
-In your silence, I find comfort. And in your presence, I find peace.
-
-Today isn’t just about saying “Happy Valentine’s Day.”
-It’s about choosing you — in every small moment, every challenge,
-and every beautiful memory yet to come.
-
-Thank you for being exactly who you are.
-Thank you for choosing me.
-And thank you for making my world brighter just by being in it 💖🌹
-
-You are, and always will be, my Valentine.
-  `;
-};
-function showValentineDayIfUnlocked() {
-  const now = new Date();
-  const valentineDay = new Date(
-    now.getFullYear(),
-    1, // February
-    14,
-    0, 0, 0
-  );
-
-  if (now >= valentineDay) {
-    kissDaySection.style.display = "none";
-    questionSection.style.display = "block";
-    setupValentineQuestion();
-  }
+    yesBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.getElementById("questionSection").style.display = "none";
+        document.getElementById("valentineSection").style.display = "block";
+        
+        // Update the final love letter text
+        const finalPara = document.querySelector("#valentineSection .valen-text p");
+        if (finalPara) {
+            finalPara.innerHTML = `
+                From the very first moment you entered my life, something quietly changed inside me. 
+                You became the reason my ordinary days felt special.<br><br>
+                Today isn’t just about saying “Happy Valentine’s Day.” 
+                It’s about choosing you — in every small moment. 💖🌹<br><br>
+                <strong>You are, and always will be, my Valentine.</strong>
+            `;
+        }
+        
+        startPetals(); // Celebrate!
+    });
 }
-
-// If they click Yes
