@@ -36,7 +36,7 @@ passwordInput.addEventListener("keydown", (e) => {
   passwordInput.value = loveSymbols[0].repeat(realPassword.length);
 });
 function checkValentineTimer() {
-  const now = new Date();
+  const now = new Date(2026,2,7);
 
   // Feb is month 1 (JS months start from 0)
   const targetDate = new Date(now.getFullYear(), 1, 8, 0, 0, 0);
@@ -395,7 +395,28 @@ function showKissDayIfUnlocked() {
     startKissTyping();
   }
 }
+function showValentineDayIfUnlocked() {
+    const now = new Date();
+    const vDay= new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  );
 
+
+
+
+    if (now >= vDay) {
+        // Hide everything else
+        const sections = ["loginSection", "roseDaySection", "proposeDaySection", "chocolateDaySection", "teddyDaySection", "promiseDaySection", "hugDaySection", "kissDaySection","countdown"];
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.style.display = "none";
+        });
+        
+        document.getElementById("questionSection").style.display = "block";
+    }
+}
 
 
 
@@ -431,9 +452,66 @@ loginBtn.addEventListener("click", () => {
     showPromiseDayIfUnlocked();
     showHugDayIfUnlocked();
     showKissDayIfUnlocked();
+    showValentineDayIfUnlocked();
 userGreeting.textContent = `Hi ${username} 💕`;
 
   } else {
     errorMsg.textContent = "Wrong username or love password 💔";
   }
 });
+
+function setupValentineQuestion() {
+  let noCount = 0;
+
+  // reset UI
+  questionSection.style.display = "block";
+  valentineSection.style.display = "none";
+  noBtn.style.display = "inline-block";
+  yesBtn.style.transform = "scale(1)";
+
+  title.textContent = "Will you be my valentine😍?";
+  paragraph.textContent = "I didn’t plan this but my heart did. 💗!";
+
+  noBtn.onclick = () => {
+    noCount++;
+    yesBtn.style.transform = `scale(${1 + noCount * 0.15})`;
+
+    if (noCount === 1) {
+      title.textContent = "Are you sure you want to say NO? 😢";
+      paragraph.textContent = "I think your heart doesn't want to say NO 😊";
+    } else if (noCount === 2) {
+      title.textContent = "Please don't say NO! 🥺";
+      paragraph.textContent = "Your YES will make my day! 💖";
+    } else {
+      noBtn.style.display = "none";
+    }
+  };
+
+  yesBtn.onclick = () => {
+    questionSection.style.display = "none";
+    valentineSection.style.display = "block";
+  };
+}
+
+
+  document.querySelector(".valen-text p").textContent = `
+From the very first moment you entered my life, something quietly changed inside me.
+You became the reason my ordinary days felt special, my smiles came easier,
+and my heart felt a little more at home.
+
+I may not always have the perfect words, but my feelings for you are real,
+deep, and constant. In your laughter, I find my happiness.
+In your silence, I find comfort. And in your presence, I find peace.
+
+Today isn’t just about saying “Happy Valentine’s Day.”
+It’s about choosing you — in every small moment, every challenge,
+and every beautiful memory yet to come.
+
+Thank you for being exactly who you are.
+Thank you for choosing me.
+And thank you for making my world brighter just by being in it 💖🌹
+
+You are, and always will be, my Valentine.`
+
+
+// If they click Yes
