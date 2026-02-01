@@ -1,6 +1,6 @@
 /************** SAVED LOGIN DETAILS **************/
-const SAVED_USERNAME = "Sindhu";
-const SAVED_PASSWORD = "Teja@143";
+const SAVED_USERNAME = "sindhu";
+const SAVED_PASSWORD = "sindhu@123";
 let chocolateInterval = null;
 
 
@@ -122,13 +122,7 @@ const roseDaySection = document.getElementById("roseDaySection");
 function handleRoseDay(username) {
     
   const now = new Date();
-    const roseDayDate = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate()
-  );
-
-
+    const roseDayDate = new Date(now.getFullYear(), 1, 7, 0, 0, 0); // Feb 7
 
 
   const greeting = document.getElementById("userGreeting");
@@ -452,7 +446,6 @@ loginBtn.addEventListener("click", () => {
     showPromiseDayIfUnlocked();
     showHugDayIfUnlocked();
     showKissDayIfUnlocked();
-    showValentineDayIfUnlocked();
 
 
 
@@ -545,5 +538,20 @@ And thank you for making my world brighter just by being in it 💖🌹
 You are, and always will be, my Valentine.
   `;
 };
+function showValentineDayIfUnlocked() {
+  const now = new Date();
+  const valentineDay = new Date(
+    now.getFullYear(),
+    1, // February
+    14,
+    0, 0, 0
+  );
+
+  if (now >= valentineDay) {
+    kissDaySection.style.display = "none";
+    questionSection.style.display = "block";
+    setupValentineQuestion();
+  }
+}
 
 // If they click Yes
