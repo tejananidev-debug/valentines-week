@@ -1,9 +1,11 @@
 /************** SAVED LOGIN DETAILS **************/
 const SAVED_USERNAME = "sindhu";
 const SAVED_PASSWORD = "sindhu@123";
+
+/************** GLOBAL STATE **************/
+let realPassword = "";
+let petalInterval = null;
 let chocolateInterval = null;
-
-
 
 /************** ELEMENTS **************/
 const loginSection = document.getElementById("loginSection");
@@ -14,16 +16,19 @@ const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
 const errorMsg = document.getElementById("errorMsg");
-const title = document.getElementById("title");
-const paragraph = document.getElementById("paragraph");
+
+const userGreeting = document.getElementById("userGreeting");
+const countdown = document.getElementById("countdown");
+
+const roseDaySection = document.getElementById("roseDaySection");
+const proposeDaySection = document.getElementById("proposeDaySection");
 const chocolateDaySection = document.getElementById("chocolateDaySection");
-
-
+const teddyDaySection = document.getElementById("teddyDaySection");
+const promiseDaySection = document.getElementById("promiseDaySection");
+const hugDaySection = document.getElementById("hugDaySection");
+const kissDaySection = document.getElementById("kissDaySection");
 
 /************** LOVE PASSWORD ENGINE **************/
-let realPassword = "";
-const loveSymbols = ["💗"];
-
 passwordInput.addEventListener("keydown", (e) => {
   e.preventDefault();
 
@@ -33,405 +38,131 @@ passwordInput.addEventListener("keydown", (e) => {
     realPassword += e.key;
   }
 
-  passwordInput.value = loveSymbols[0].repeat(realPassword.length);
+  passwordInput.value = "💗".repeat(realPassword.length);
 });
-function checkValentineTimer() {
-  const now = new Date();
 
-  // Feb is month 1 (JS months start from 0)
-  const targetDate = new Date(now.getFullYear(), 1, 8, 0, 0, 0);
-
-  if (now < targetDate) {
-    startCountdown(targetDate);
-  } else {
-    countdown.textContent = "";
-  }
-}
-function startCountdown(targetDate) {
-  setInterval(() => {
-    const now = new Date();
-    const diff = targetDate - now;
-
-    if (diff <= 0) {
-      countdown.textContent = "It's Valentine Week 💖";
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    countdown.textContent =
-      `Valentine Week unlocks in ${days}d ${hours}h ${minutes}m ${seconds}s 💝`;
-  }, 1000);
-}
-function createPetal() {
-  const petal = document.createElement("div");
-  petal.classList.add("petal");
-
-  petal.textContent = "🌸"; // you can use 🌹 too
-
-  // Random horizontal position
-  petal.style.left = Math.random() * 100 + "vw";
-
-  // Random animation duration (slow & romantic)
-  const duration = Math.random() * 5 + 5;
-  petal.style.animationDuration = duration + "s";
-
-  // Random size
-  petal.style.fontSize = Math.random() * 20 + 16 + "px";
-
-  document.body.appendChild(petal);
-
-  // Remove petal after animation
-  setTimeout(() => {
-    petal.remove();
-  }, duration * 1000);
-}
-let petalInterval;
-
+/************** EFFECTS **************/
 function startPetals() {
-  if (!petalInterval) {
-    petalInterval = setInterval(createPetal, 400);
-  }
-}
-function stopPetals() {
-  if (petalInterval) {
-    clearInterval(petalInterval);
-    petalInterval = null;
-  }
+  if (petalInterval) return;
+  petalInterval = setInterval(() => {
+    const petal = document.createElement("div");
+    petal.textContent = "🌸";
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.fontSize = Math.random() * 20 + 16 + "px";
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 6000);
+  }, 400);
 }
 
-/* 🍫 CHOCOLATE CONTROL */
+function stopPetals() {
+  clearInterval(petalInterval);
+  petalInterval = null;
+}
+
 function startChocolates() {
   if (chocolateInterval) return;
-  chocolateInterval = setInterval(createChocolate, 400);
+  chocolateInterval = setInterval(() => {
+    const choco = document.createElement("div");
+    choco.textContent = "🍫";
+    choco.className = "chocolate";
+    choco.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(choco);
+    setTimeout(() => choco.remove(), 5000);
+  }, 400);
 }
 
 function stopChocolates() {
-  if (chocolateInterval) {
-    clearInterval(chocolateInterval);
-    chocolateInterval = null;
-  }
+  clearInterval(chocolateInterval);
+  chocolateInterval = null;
 }
 
-
-const roseDaySection = document.getElementById("roseDaySection");
-
-function handleRoseDay(username) {
-    
-  const now = new Date();
-    const roseDayDate = new Date(now.getFullYear(), 1, 7, 0, 0, 0); // Feb 7
-
-
-  const greeting = document.getElementById("userGreeting");
-  const countdown = document.getElementById("countdown");
-  const roseDaySection = document.getElementById("roseDaySection");
-
-  greeting.textContent = `Hi ${username} 💕`;
-
-  if (now < roseDayDate) {
-    // 🔒 BEFORE Feb 7
-    roseDaySection.style.display = "none";
-    countdown.style.display = "block";
-  } else {
-    // 🌹 ON / AFTER Feb 7
-    countdown.style.display = "none";
-    roseDaySection.style.display = "block";
-    startPetals();
-  }
-}
-
-
-
-
-document.getElementById("nextDayBtn").addEventListener("click", () => {
-  alert("Come back tomorrow to unlock Propose Day 💍💖");
-  loginSection.style.display = "flex";
-  chocolateDaySection.style.display = "none";
-  userGreeting.textContent = `Valentines week 💕`;
-
-});
-const proposeDaySection = document.getElementById("proposeDaySection");
-
-function showProposeDayIfUnlocked() {
-  const now = new Date();
-    const proposeDayDate = new Date(now.getFullYear(), 1, 8, 0, 0, 0); // Feb 8
-
-
-  if (now >= proposeDayDate) {
-    // Hide other sections
-    questionSection.style.display = "none";
-    roseDaySection.style.display = "none";
-
-    // Show Propose Day
-    proposeDaySection.style.display = "block";
-
-    // Stop Rose Day effects
-    countdown.style.display = "none";
-    stopPetals();
-  }
-}
-
-
-
-document.getElementById("proposeYesBtn").addEventListener("click", () => {
-  alert("She said YES 💖💍 Forever begins now!");
-});
-function showChocolateDayIfUnlocked() {
-  const now = new Date();
-  const chocolateDay = new Date(now.getFullYear(), 1, 9, 0, 0, 0); // Feb 9
-
-  if (now >= chocolateDay) {
-    console.log("🍫 Chocolate Day unlocked");
-
-    // hide others
-    roseDaySection.style.display = "none";
-    proposeDaySection.style.display = "none";
-    questionSection.style.display = "none";
-
-    // stop other effects
-    stopPetals();
-    stopChocolates();
-    countdown.style.display = "none";
-
-    // show chocolate day
-    chocolateDaySection.style.display = "block";
-    startChocolates();
-  }
-}
-document.getElementById("nextFromChocolate").addEventListener("click", () => {
-  alert("Teddy Day is waiting for you 🧸💖");
-  loginSection.style.display = "flex";
-    chocolateDaySection.style.display = "none";
-    userGreeting.textContent = `Valentines week 💕`;
-
-
-});
-const teddyDaySection = document.getElementById("teddyDaySection");
-
-function showTeddyDayIfUnlocked() {
-  const now = new Date();
-  const teddyDay = new Date(now.getFullYear(), 1, 10, 0, 0, 0); // Feb 10
-
-
-  if (now >= teddyDay) {
-    console.log("🧸 Teddy Day unlocked");
-
-    // hide previous days
-    chocolateDaySection.style.display = "none";
-    proposeDaySection.style.display = "none";
-    roseDaySection.style.display = "none";
-    questionSection.style.display = "none";
-
-    // stop other effects
-    stopPetals();
-    stopChocolates();
-    countdown.style.display = "none";
-
-    // show teddy day
-    teddyDaySection.style.display = "block";
-  }
-}
-document.getElementById("teddyNextBtn").addEventListener("click", () => {
-  alert("Promise Day is waiting for you 🤞💖");
-});
-const promiseMessage =
-  "On this Promise Day, I promise to stand by you in every season of life 🤍\n" +
-  "Through smiles and silence, dreams and doubts,\n" +
-  "I choose you — today, tomorrow, and always 🤞💖";
-
-function typeText(element, text, speed = 50) {
-  element.textContent = "";
-  let index = 0;
-
+/************** TYPING EFFECT **************/
+function typeText(el, text, speed = 50) {
+  el.textContent = "";
+  let i = 0;
   const interval = setInterval(() => {
-    if (index < text.length) {
-      element.textContent += text[index];
-      index++;
-    } else {
-      clearInterval(interval);
-    }
+    el.textContent += text[i];
+    i++;
+    if (i >= text.length) clearInterval(interval);
   }, speed);
 }
-const promiseDaySection = document.getElementById("promiseDaySection");
 
-function showPromiseDayIfUnlocked() {
+/************** MASTER VALENTINE CONTROLLER **************/
+function showTodayValentineDay(username) {
   const now = new Date();
-    const promiseDay = new Date(now.getFullYear(), 1, 11, 0, 0, 0); // Feb 11
+  const y = now.getFullYear();
 
+  const days = {
+    rose: new Date(y, 1, 7),
+    propose: new Date(y, 1, 8),
+    chocolate: new Date(y, 1, 9),
+    teddy: new Date(y, 1, 10),
+    promise: new Date(y, 1, 11),
+    hug: new Date(y, 1, 12),
+    kiss: new Date(y, 1, 13),
+    valentine: new Date(y, 1, 14)
+  };
 
-  if (now >= promiseDay) {
-    console.log("🤞 Promise Day unlocked");
+  // Hide everything first
+  [
+    roseDaySection,
+    proposeDaySection,
+    chocolateDaySection,
+    teddyDaySection,
+    promiseDaySection,
+    hugDaySection,
+    kissDaySection,
+    questionSection
+  ].forEach(sec => sec && (sec.style.display = "none"));
 
-    // hide other days
-    teddyDaySection.style.display = "none";
-    chocolateDaySection.style.display = "none";
-    proposeDaySection.style.display = "none";
-    roseDaySection.style.display = "none";
-    questionSection.style.display = "none";
+  stopPetals();
+  stopChocolates();
+  countdown.style.display = "none";
 
-    // stop all effects
-    stopPetals();
-    stopChocolates();
-    countdown.style.display = "none";
-
-    // show promise day
-    promiseDaySection.style.display = "block";
-
-    // start typing
-    const promiseTextEl = document.getElementById("promiseText");
-    typeText(promiseTextEl, promiseMessage, 60);
+  // Newest day FIRST
+  if (now >= days.valentine) {
+    questionSection.style.display = "block";
+    setupValentineLogic();
   }
-}
-document.getElementById("promiseNextBtn").addEventListener("click", () => {
-  alert("Hug Day is waiting for you 🫂💖");
-  loginSection.style.display = "flex";
-    promiseDaySection.style.display = "none";
-    userGreeting.textContent = `Valentines week 💕`;
-});
-const hugMessage = `A hug is my silent promise that you’re never alone.
-In your happiest moments and your toughest days,
-I’ll always be right here — holding you close,
-wrapping you in comfort, love, and warmth 🤍🤗`;
-
-function startHugTyping() {
-  const textEl = document.getElementById("hugText");
-  const cursor = document.getElementById("hugCursor");
-
-  let i = 0;
-  textEl.textContent = "";
-  cursor.style.display = "inline";
-
-  const interval = setInterval(() => {
-    textEl.textContent += hugMessage[i];
-    i++;
-
-    if (i >= hugMessage.length) {
-      clearInterval(interval);
-      cursor.style.display = "none";
-    }
-  }, 40);
-}
-
-function showHugDayIfUnlocked() {
-  const now = new Date();
-  const hugDay = new Date(now.getFullYear(), 1, 12, 0, 0, 0); // Feb 12
-
-
-  if (now >= hugDay) {
-    // hide others
-    chocolateDaySection.style.display = "none";
-    promiseDaySection.style.display = "none";
-    countdown.style.display = "none";
-
-    // show hug day
+  else if (now >= days.kiss) {
+    kissDaySection.style.display = "block";
+  }
+  else if (now >= days.hug) {
     hugDaySection.style.display = "block";
     startHugTyping();
   }
-}
-document.getElementById("hugNextBtn").addEventListener("click", () => {
-  alert("Kiss Day is waiting for you 💋💖");
-  loginSection.style.display = "flex";
-    hugDaySection.style.display = "none";
-    userGreeting.textContent = `Valentines week 💕`;
-});
-const kissMessage = `A kiss is a quiet moment where the world fades away.
-No words, no noise — just love, warmth, and us.
-Every kiss is a promise I keep, again and again 💖💋`;
-
-function startKissTyping() {
-  const text = document.getElementById("kissText");
-  const cursor = document.getElementById("kissCursor");
-
-  let i = 0;
-  text.textContent = "";
-  cursor.style.display = "inline";
-
-  const interval = setInterval(() => {
-    text.textContent += kissMessage[i];
-    i++;
-
-    if (i >= kissMessage.length) {
-      clearInterval(interval);
-      cursor.style.display = "none";
-    }
-  }, 55);
-}
-function showKissEffect() {
-  for (let i = 0; i < 8; i++) {
-    createHeart();
+  else if (now >= days.promise) {
+    promiseDaySection.style.display = "block";
+    typeText(
+      document.getElementById("promiseText"),
+      "On this Promise Day, I promise to stand by you forever 🤍🤞",
+      60
+    );
   }
-}
-
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.textContent = "💖";
-  heart.style.position = "fixed";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.top = "70%";
-  heart.style.fontSize = "30px";
-  heart.style.animation = "floatUp 2.5s ease-out";
-
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 2500);
-}
-const kissDaySection = document.getElementById("kissDaySection");
-
-function showKissDayIfUnlocked() {
-  const now = new Date();
-    const kissDay = new Date(now.getFullYear(), 1, 13, 0, 0, 0); // Feb 13
-  
-
-  if (now >= kissDay) {
-    hugDaySection.style.display = "none";
-    promiseDaySection.style.display = "none";
-    stopPetals();
-    stopChocolates();
-    countdown.style.display = "none";
-    kissDaySection.style.display = "block";
-    startKissTyping();
+  else if (now >= days.teddy) {
+    teddyDaySection.style.display = "block";
   }
-}
-/************** VALENTINE DAY UNLOCKING **************/
-function showValentineDayIfUnlocked() {
-    const now = new Date(); 
-    // For testing, you can use: const now = new Date(2026, 1, 14);
-    const vDay = new Date(now.getFullYear(), 1, 14, 0, 0, 0); 
+  else if (now >= days.chocolate) {
+    chocolateDaySection.style.display = "block";
+    startChocolates();
+  }
+  else if (now >= days.propose) {
+    proposeDaySection.style.display = "block";
+  }
+  else if (now >= days.rose) {
+    roseDaySection.style.display = "block";
+    startPetals();
+  }
 
-    if (now >= vDay) {
-        // Hide all previous sections
-        const sections = ["loginSection", "roseDaySection", "proposeDaySection", "chocolateDaySection", "teddyDaySection", "promiseDaySection", "hugDaySection", "kissDaySection", "countdown-section"];
-        sections.forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.style.display = "none";
-        });
-
-        document.getElementById("questionSection").style.display = "block";
-        setupValentineLogic();
-    }
+  userGreeting.textContent = `Hi ${username} 💕`;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/************** LOGIN LOGIC **************/
+/************** LOGIN **************/
 loginBtn.addEventListener("click", () => {
   const username = usernameInput.value.trim();
 
-  if (username === "" || realPassword === "") {
+  if (!username || !realPassword) {
     errorMsg.textContent = "Please enter username and love password 💔";
     return;
   }
@@ -439,75 +170,34 @@ loginBtn.addEventListener("click", () => {
   if (username === SAVED_USERNAME && realPassword === SAVED_PASSWORD) {
     errorMsg.textContent = "";
     loginSection.style.display = "none";
-    const userGreeting = document.getElementById("userGreeting");
-    const countdown = document.getElementById("countdown");
-    checkValentineTimer();
-    handleRoseDay(username);
-    showProposeDayIfUnlocked();
-    showChocolateDayIfUnlocked();
-    showTeddyDayIfUnlocked();
-    showPromiseDayIfUnlocked();
-    showHugDayIfUnlocked();
-    showKissDayIfUnlocked();
-    showValentineDayIfUnlocked();
-userGreeting.textContent = `Hi ${username} 💕`;
-
+    showTodayValentineDay(username);
   } else {
     errorMsg.textContent = "Wrong username or love password 💔";
   }
 });
-function setupValentineLogic() {
-    let noCount = 0;
-    const yesBtn = document.getElementById("Yesbtn");
-    const noBtn = document.getElementById("Nobtn");
-    const qTitle = document.getElementById("questionTitle");
-    const qPara = document.getElementById("questionPara");
 
-    if (!yesBtn || !noBtn) return;
-
-    noBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        noCount++;
-
-        // Make Yes button grow
-        const newScale = 1 + noCount * 0.4;
-        yesBtn.style.transform = `scale(${newScale})`;
-        yesBtn.style.display = "inline-block";
-        yesBtn.style.transition = "transform 0.3s ease";
-
-        // Change text based on clicks
-        if (noCount === 1) {
-            qTitle.textContent = "Are you sure? 😢";
-            qPara.textContent = "I think your heart doesn't want to say NO 😊";
-        } else if (noCount === 2) {
-            qTitle.textContent = "Please don't say NO! 🥺";
-            qPara.textContent = "Your YES will make my day! 💖";
-        } else if (noCount === 3) {
-            qTitle.textContent = "I'll make you the happiest! 😊";
-            qPara.textContent = "Just say YES! 💕";
-        } else {
-            noBtn.style.display = "none"; // Hide No button
-            qTitle.textContent = "Only one choice left! 😉";
-        }
-    });
-
-    yesBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        document.getElementById("questionSection").style.display = "none";
-        document.getElementById("valentineSection").style.display = "block";
-        
-        const finalLetter = document.getElementById("finalLetter");
-        finalLetter.innerHTML = `
-            From the very first moment you entered my life, something quietly changed inside me. 
-            You became the reason my ordinary days felt special, my smiles came easier, 
-            and my heart felt a little more at home.<br><br>
-            Today isn’t just about saying “Happy Valentine’s Day.” 
-            It’s about choosing you — in every small moment, every challenge, 
-            and every beautiful memory yet to come.<br><br>
-            Thank you for being exactly who you are. 💖🌹
-        `;
-        
-        startPetals(); // Trigger the falling petals effect
-    });
+/************** HUG DAY **************/
+function startHugTyping() {
+  const hugText = document.getElementById("hugText");
+  const hugMessage = `A hug is my silent promise that you’re never alone 🤍🫂`;
+  typeText(hugText, hugMessage, 40);
 }
 
+/************** VALENTINE QUESTION **************/
+function setupValentineLogic() {
+  let noCount = 0;
+  const yesBtn = document.getElementById("Yesbtn");
+  const noBtn = document.getElementById("Nobtn");
+
+  noBtn.onclick = () => {
+    noCount++;
+    yesBtn.style.transform = `scale(${1 + noCount * 0.4})`;
+    if (noCount >= 4) noBtn.style.display = "none";
+  };
+
+  yesBtn.onclick = () => {
+    questionSection.style.display = "none";
+    valentineSection.style.display = "block";
+    startPetals();
+  };
+}
